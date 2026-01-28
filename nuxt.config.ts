@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       "Instrument+Sans": [400, 500, 600, 700],
+      Geist: [400, 500, 600, 700],
     },
   },
 });

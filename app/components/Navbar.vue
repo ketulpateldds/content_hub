@@ -7,7 +7,7 @@ const isMenuOpen = ref(false)
 
 <template>
     <nav
-        class="fixed top-0 left-0 w-full h-[80px] border-b border-white/10 backdrop-blur-[50px] bg-white/10 flex items-center justify-between px-4 py-[18px] md:p-6 lg:py-[30px] lg:pl-24 lg:pr-20 text-white">
+        class="fixed top-0 left-0 w-full z-50 h-[80px] border-b border-white/10 backdrop-blur-[50px] bg-white/10 flex items-center justify-between px-4 py-[18px] md:p-6 lg:py-[30px] lg:pl-24 lg:pr-20 text-white">
 
         <div class="flex items-center w-full md:w-auto justify-between md:justify-normal gap-4">
             <!-- Hamburger Menu -->
