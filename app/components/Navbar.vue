@@ -43,7 +43,7 @@ const isMenuOpen = ref(false)
                 class="flex items-center justify-center relative transition-colors"
                 :class="currentTab === 'Home' ? 'text-white after:content-[\'\'] after:absolute after:top-[47px] after:left-1/2 after:-translate-x-1/2 after:w-[40px] after:h-[2px] after:bg-white' : 'text-white/60 hover:text-white'">
                 Home</NuxtLink>
-            <NuxtLink to="/" @click="currentTab = 'Categories'"
+            <NuxtLink to="/categories" @click="currentTab = 'Categories'"
                 class="flex items-center justify-center relative transition-colors"
                 :class="currentTab === 'Categories' ? 'text-white after:content-[\'\'] after:absolute after:top-[47px] after:left-1/2 after:-translate-x-1/2 after:w-[72px] after:h-[2px] after:bg-white' : 'text-white/60 hover:text-white'">
                 Categories</NuxtLink>
@@ -71,7 +71,8 @@ const isMenuOpen = ref(false)
         <NuxtLink to="/" @click="currentTab = 'Home'; isMenuOpen = false" class="py-[10px] font-medium text-sm"
             :class="currentTab === 'Home' ? 'text-white' : 'text-white/60 hover:text-white'">Home
         </NuxtLink>
-        <NuxtLink to="/" @click="currentTab = 'Categories'; isMenuOpen = false" class="py-[10px] font-medium text-sm"
+        <NuxtLink to="/categories" @click="currentTab = 'Categories'; isMenuOpen = false"
+            class="py-[10px] font-medium text-sm"
             :class="currentTab === 'Categories' ? 'text-white' : 'text-white/60 hover:text-white'">Categories
         </NuxtLink>
         <NuxtLink to="/" @click="currentTab = 'About'; isMenuOpen = false" class="py-[10px] font-medium text-sm"
