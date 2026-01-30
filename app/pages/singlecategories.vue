@@ -4,24 +4,28 @@ const activeFilter = ref("All");
 
 const featuredContent = [
     {
+        id: 1,
         title: "The Next Robot Era",
         desc: "Exploring innovations in intelligent robotics designed to transform daily life, work, and society.",
         image: "/assets/images/new-releases1.png",
         badges: [],
     },
     {
+        id: 2,
         title: "Learning Without Limits",
         desc: "Discover flexible, accessible learning platforms designed for modern education.",
         image: "/assets/images/new-releases2.png",
         badges: [],
     },
     {
+        id: 3,
         title: "Fit for YOUR Project",
         desc: "Tailored fitness solutions designed to match your unique health and wellness goals.",
         image: "/assets/images/new-releases3.png",
         badges: [],
     },
     {
+        id: 4,
         title: "Ideas Tomorrow",
         desc: "Innovative concepts shaping the future of creativity, technology, and human experience.",
         image: "/assets/images/new-releases4.png",
@@ -31,72 +35,84 @@ const featuredContent = [
 
 const allContent = [
     {
+        id: 5,
         title: "The Next Robot Era",
         desc: "Exploring innovations in intelligent robotics designed to transform daily life, work, and society.",
         image: "/assets/images/new-releases1.png",
         badges: ["meditation", "mindfulness"],
     },
     {
+        id: 6,
         title: "Learning Without Limits",
         desc: "Discover flexible, accessible learning platforms designed for modern education.",
         image: "/assets/images/new-releases2.png",
         badges: ["meditation", "mindfulness"],
     },
     {
+        id: 7,
         title: "Fit for YOUR Project",
         desc: "Tailored fitness solutions designed to match your unique health and wellness goals.",
         image: "/assets/images/new-releases3.png",
         badges: ["meditation", "mindfulness"],
     },
     {
+        id: 8,
         title: "Ideas Tomorrow",
         desc: "Innovative concepts shaping the future of creativity, technology, and human experience.",
         image: "/assets/images/new-releases4.png",
         badges: ["meditation", "mindfulness"],
     },
     {
+        id: 9,
         title: "The Next Robot Era",
         desc: "Exploring innovations in intelligent robotics designed to transform daily life, work, and society.",
         image: "/assets/images/new-releases1.png",
         badges: ["meditation", "mindfulness"],
     },
     {
+        id: 10,
         title: "Learning Without Limits",
         desc: "Discover flexible, accessible learning platforms designed for modern education.",
         image: "/assets/images/new-releases2.png",
         badges: ["meditation", "mindfulness"],
     },
     {
+        id: 11,
         title: "Fit for YOUR Project",
         desc: "Tailored fitness solutions designed to match your unique health and wellness goals.",
         image: "/assets/images/new-releases3.png",
         badges: ["meditation", "mindfulness"],
     },
     {
+        id: 12,
         title: "Ideas Tomorrow",
         desc: "Innovative concepts shaping the future of creativity, technology, and human experience.",
         image: "/assets/images/new-releases4.png",
         badges: ["meditation", "mindfulness"],
     },
     {
+        id: 13,
         title: "The Next Robot Era",
         desc: "Exploring innovations in intelligent robotics designed to transform daily life, work, and society.",
         image: "/assets/images/new-releases1.png",
         badges: ["meditation", "mindfulness"],
     },
     {
+        id: 14,
         title: "Learning Without Limits",
         desc: "Discover flexible, accessible learning platforms designed for modern education.",
         image: "/assets/images/new-releases2.png",
         badges: ["meditation", "mindfulness"],
     },
     {
+        id: 15,
         title: "Fit for YOUR Project",
         desc: "Tailored fitness solutions designed to match your unique health and wellness goals.",
         image: "/assets/images/new-releases3.png",
         badges: ["meditation", "mindfulness"],
     },
     {
+        id: 16,
         title: "Ideas Tomorrow",
         desc: "Innovative concepts shaping the future of creativity, technology, and human experience.",
         image: "/assets/images/new-releases4.png",
@@ -109,12 +125,12 @@ const allContent = [
     <div class="min-h-screen bg-[#0B0D12] text-[#FFFFFF]">
         <!-- Hero Section -->
         <section class="relative h-[632px] w-full flex flex-col" style="
-        background-image: url(&quot;/assets/images/categories-bg2.png&quot;);
+        background-image: url('/assets/images/categories-bg2.png');
         background-size: cover;
         background-position: center;
       ">
             <div class="absolute top-[275px] left-[96px] z-10 max-w-[1018px]">
-                <div class="flex items-center gap-[10px] text-[#00A8AB] mb-[9px]">
+                <div @click="navigateTo('/categories')" class="flex items-center gap-[10px] text-[#00A8AB] mb-[9px]">
                     <i class="ri-arrow-left-line text-2xl"></i>
                     <span
                         class="font-['Instrument_Sans'] font-semibold text-sm leading-[100%] tracking-[5%] uppercase">Back
@@ -158,7 +174,8 @@ const allContent = [
             <!-- Featured Grid -->
             <div class="grid grid-cols-4 gap-6">
                 <div v-for="item in featuredContent" :key="item.title"
-                    class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer">
+                    class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer"
+                    @click="navigateTo(`/singlecontent?id=${item.id}`)">
                     <img :src="item.image" :alt="item.title"
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
 
@@ -205,7 +222,8 @@ const allContent = [
             <!-- Content Grid -->
             <div class="grid grid-cols-4 gap-6">
                 <div v-for="item in allContent" :key="item.title + Math.random()"
-                    class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer">
+                    class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer"
+                    @click="navigateTo(`/singlecontent?id=${item.id}`)">
                     <img :src="item.image" :alt="item.title"
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
 
@@ -255,7 +273,7 @@ const allContent = [
             </div>
         </section>
 
-        <div class="w-[1320px] h-[1px] bg-[#1C1F26] mx-auto mb-[50px]"></div>
+        <div class="max-w-[1320px] h-[1px] bg-[#1C1F26] mx-auto mb-[50px]"></div>
 
         <!-- About Section -->
         <section class="max-w-[1320px] mx-auto">

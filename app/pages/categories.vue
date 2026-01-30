@@ -89,7 +89,8 @@ const categories = [
         <section class="max-w-[1320px] mx-auto mb-[50px]">
             <div class="grid grid-cols-4 gap-6">
                 <div v-for="cat in categories" :key="cat.title"
-                    class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer">
+                    class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer"
+                    @click="navigateTo('/singlecategories')">
                     <img :src="cat.image" :alt="cat.title"
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
 
@@ -132,7 +133,7 @@ const categories = [
             </div>
         </section>
 
-        <div class="w-[1320px] h-[1px] bg-[#1C1F26] mx-auto mb-[50px]"></div>
+        <div class="max-w-[1320px] h-[1px] bg-[#1C1F26] mx-auto mb-[50px]"></div>
 
         <!-- Promo Banner -->
         <section class="max-w-[1320px] mx-auto mb-20">
@@ -149,7 +150,5 @@ const categories = [
                 </div>
             </div>
         </section>
-
-        <div class="h-10"></div>
     </div>
 </template>

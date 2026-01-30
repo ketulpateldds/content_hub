@@ -3,10 +3,12 @@ import 'remixicon/fonts/remixicon.css'
 
 const currentTab = ref('Home')
 const isMenuOpen = ref(false)
+const isSearchOpen = ref(false)
+const isLanguageModalOpen = ref(false)
 </script>
 
 <template>
-    <nav
+    <nav v-show="!isSearchOpen && !isLanguageModalOpen"
         class="fixed top-0 left-0 w-full z-50 h-[80px] border-b border-white/10 backdrop-blur-[50px] bg-white/10 flex items-center justify-between px-4 py-[18px] md:p-6 lg:py-[30px] lg:pl-24 lg:pr-20 text-white">
 
         <div class="flex items-center w-full md:w-auto justify-between md:justify-normal gap-4">
@@ -25,10 +27,11 @@ const isMenuOpen = ref(false)
 
             <!-- search & translate -->
             <div class="md:hidden flex items-center gap-[10px] text-white/80">
-                <button class="hover:text-white transition-colors">
+                <button class="hover:text-white transition-colors" @click="isSearchOpen = true">
                     <i class="ri-search-line text-lg w-5 h-5"></i>
                 </button>
-                <div class="flex items-center gap-[7px] cursor-pointer hover:text-white transition-colors text-sm">
+                <div class="flex items-center gap-[7px] cursor-pointer hover:text-white transition-colors text-sm"
+                    @click="isLanguageModalOpen = true">
                     <div>
                         <i class="ri-translate-2 text-lg w-5 h-5"></i>
                     </div>
@@ -54,10 +57,11 @@ const isMenuOpen = ref(false)
         </div>
 
         <div class="hidden md:flex items-center gap-5 text-white/80">
-            <button class="hover:text-white transition-colors">
+            <button class="hover:text-white transition-colors" @click="isSearchOpen = true">
                 <i class="ri-search-line text-xl w-5 h-5"></i>
             </button>
-            <div class="flex items-center gap-[7px] cursor-pointer hover:text-white transition-colors text-sm">
+            <div class="flex items-center gap-[7px] cursor-pointer hover:text-white transition-colors text-sm"
+                @click="isLanguageModalOpen = true">
                 <div>
                     <i class="ri-translate-2 text-xl w-5 h-5"></i>
                 </div>
@@ -79,4 +83,10 @@ const isMenuOpen = ref(false)
             :class="currentTab === 'About' ? 'text-white' : 'text-white/60 hover:text-white'">About
         </NuxtLink>
     </div>
+
+    <!-- Search Modal -->
+    <Search v-model="isSearchOpen" />
+
+    <!-- Language Modal -->
+    <LanguageModel v-model="isLanguageModalOpen" />
 </template>

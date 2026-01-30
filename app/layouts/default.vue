@@ -5,7 +5,7 @@ import Footer from '~/components/Footer.vue';
 </script>
 
 <template>
-    <div>
+    <div class="bg-[#0B0D12]">
         <Navbar />
         <main>
             <slot />
