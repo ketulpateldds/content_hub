@@ -87,64 +87,66 @@ const topPicks = [
 </script>
 
 <template>
-    <div class="min-h-screen bg-[#0B0D12] text-[#FFFFFF]">
+    <div class="min-h-screen bg-deep-black text-white">
         <!-- Hero Section -->
-        <section class="relative h-[632px] w-full flex flex-col"
+        <section class="relative h-[400px] lg:h-[632px] w-full flex flex-col"
             style="
         background-image: url('/assets/images/content-bg.png'); background-size: cover; background-position: top center;">
-            <div class="absolute top-[254px] left-[96px] z-10 max-w-[1080px]">
+            <div class="absolute top-[171px] lg:top-[254px] left-6 lg:left-[96px] z-10 max-w-[1080px]">
                 <button @click="navigateTo(`/categories/${category}`)"
-                    class="flex items-center gap-[10px] text-[#00A8AB] mb-[25px] hover:text-[#00989B] transition-colors">
-                    <i class="ri-arrow-left-line text-2xl"></i>
+                    class="flex items-center h-5 lg:h-6 gap-[10px] text-accent mb-[10px] lg:mb-[25px] hover:text-accent/90 transition-colors">
+                    <i class="ri-arrow-left-line text-xl lg:text-2xl"></i>
                     <span
                         class="font-['Instrument_Sans'] font-semibold text-sm leading-[100%] tracking-[5%] uppercase">Back
                         to Categories</span>
                 </button>
                 <span
-                    class="inline-block h-[27px] rounded-[5px] py-[5px] px-[7px] bg-[#D4AF37] font-['Instrument_Sans'] font-semibold text-xs leading-[140%] mb-[10px]">Health
+                    class="inline-block h-6 lg:h-[27px] rounded-[5px] py-[5px] px-[7px] bg-[#D4AF37] font-['Instrument_Sans'] font-semibold text-[10px] lg:text-xs leading-[140%] mb-[10px]">Health
                     & Wellness</span>
-                <h1 class="font-['Geist'] font-bold text-[76px] leading-[100%] mb-[30px] bg-gradient-to-r from-[#FFFFFFE5]
+                <h1 class="font-['Geist'] font-bold text-[40px] lg:text-[76px] leading-[100%] mb-[10px] lg:mb-[30px] bg-gradient-to-r from-[#FFFFFFE5]
                 to-[#FFFFFF99] bg-clip-text text-transparent">
                     {{ contentData.title }}
                 </h1>
-                <p class="font-['Instrument_Sans'] font-normal text-lg leading-[100%]">
+                <p class="font-['Instrument_Sans'] font-normal text-base lg:text-lg leading-[150%] lg:leading-[100%]">
                     {{ contentData.subtitle }}
                 </p>
             </div>
         </section>
 
         <!-- Content Body Section -->
-        <section class="max-w-[1320px] mx-auto py-[50px]">
+        <section class="max-w-[744px] lg:max-w-[1320px] mx-auto pt-[50px] pb-10 lg:py-[50px]">
             <div class="max-w-[1096px] mx-auto">
                 <!-- Content Paragraphs -->
                 <div v-for="(paragraph, index) in contentData.content.paragraphs.slice(0, 3)" :key="index"
-                    class="max-w-[872px] mx-auto">
-                    <p class="mb-5 font-['Instrument_Sans'] font-normal text-lg leading-[160%] text-[#B8BDC7]">
+                    class="px-6 lg:px-0 max-w-[696px] lg:max-w-[872px] mx-auto">
+                    <p
+                        class="mb-5 font-['Instrument_Sans'] font-normal text-base lg:text-lg leading-[160%] text-text-secondary">
                         {{ paragraph }}</p>
                 </div>
 
                 <!-- Main Content Image -->
-                <div class="my-[50px] rounded-[20px] overflow-hidden">
+                <div class="my-10 lg:my-[50px] rounded-[20px] overflow-hidden">
                     <img :src="contentData.content.mainImage" alt="Content image"
                         class="w-full h-[500px] object-cover" />
                 </div>
 
                 <!-- Additional Content After Image -->
                 <div v-for="(paragraph, index) in contentData.content.paragraphs.slice(3)" :key="index + 3"
-                    class="max-w-[872px] mx-auto">
-                    <p class="mb-5 font-['Instrument_Sans'] font-normal text-lg leading-[160%] text-[#B8BDC7]">
+                    class="px-6 lg:px-0 max-w-[696px] lg:max-w-[872px] mx-auto">
+                    <p
+                        class="mb-5 font-['Instrument_Sans'] font-normal text-base lg:text-lg leading-[160%] text-text-secondary">
                         {{ paragraph }}
                     </p>
                 </div>
 
                 <!-- Tags Section -->
-                <div class="max-w-[872px] mx-auto">
+                <div class="px-6 lg:px-0 mt-10 max-w-[872px] mx-auto">
                     <h3 class="font-['Instrument_Sans'] font-semibold text-lg leading-[160%] mb-[10px]">
                         Tags
                     </h3>
                     <div class="flex flex-wrap gap-[5px]">
                         <span v-for="(tag, index) in contentData.tags" :key="index"
-                            class="px-[7px] py-[5px] rounded-[5px] font-['Instrument_Sans'] font-semibold text-[10px] leading-[140%] bg-[#1C1F26]">
+                            class="px-[7px] py-[5px] rounded-[5px] font-['Instrument_Sans'] font-semibold text-[10px] leading-[140%] bg-slate-gray">
                             {{ tag }}
                         </span>
                     </div>
@@ -153,37 +155,39 @@ const topPicks = [
         </section>
 
         <!-- Top Picks Section -->
-        <section class="bg-[#12141A] py-[50px]">
-            <div class="max-w-[1320px] mx-auto">
-                <div class="flex items-center justify-between mb-10">
+        <section class="bg-soft-black py-10 lg:py-[50px]">
+            <div class="max-w-[744px] lg:max-w-[1320px] mx-auto">
+                <div class="px-6 lg:px-0 flex items-center justify-between mb-[30px] lg:mb-10">
                     <div>
-                        <h2 class="font-['Geist'] font-semibold text-[40px] leading-[100%] mb-3">
+                        <h2
+                            class="font-['Geist'] font-semibold text-[30px] lg:text-[40px] leading-[100%] mb-[5px] lg:mb-3">
                             Top Picks
                         </h2>
-                        <p class="font-['Instrument_Sans'] font-normal text-lg leading-[100%] text-[#B8BDC7]">
+                        <p
+                            class="font-['Instrument_Sans'] font-normal text-[14px] lg:text-lg leading-[150%] lg:leading-[100%] text-text-secondary">
                             You may also be interested in these related experiences.
                         </p>
                     </div>
-                    <div class="flex gap-4">
+                    <div class="flex gap-[10px] lg:gap-4">
                         <button
-                            class="w-[46px] h-[46px] flex items-center justify-center rounded-[10px] bg-[#1C1F26] hover:bg-[#2C3039] transition-colors">
+                            class="w-10 lg:w-[46px] h-10 lg:h-[46px] flex items-center justify-center rounded-[10px] bg-slate-gray hover:bg-slate-gray/80 transition-colors">
                             <i class="ri-arrow-left-line text-xl"></i>
                         </button>
                         <button
-                            class="w-[46px] h-[46px] flex items-center justify-center rounded-[10px] bg-[#00A8AB] hover:bg-[#00989B] transition-colors">
+                            class="w-10 lg:w-[46px] h-10 lg:h-[46px] flex items-center justify-center rounded-[10px] bg-accent hover:bg-accent/90 transition-colors">
                             <i class="ri-arrow-right-line text-xl"></i>
                         </button>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-4 gap-6">
+                <div class="pl-6 lg:pl-0 grid grid-cols-4 gap-[14px] lg:gap-6">
                     <div v-for="item in topPicks" :key="item.id"
-                        class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer"
+                        class=" group relative w-[240px] lg:w-[312px] h-[269px] lg:h-[350px] rounded-[14px] ring-1 ring-slate-gray ring-inset overflow-hidden cursor-pointer"
                         @click="navigateTo(`/categories/${category}/${item.id}`)">
                         <img :src="item.image" :alt="item.title"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
 
-                        <div class="absolute top-[16px] left-[16px] flex gap-[5px] z-10">
+                        <div class="absolute top-[10px] lg:top-[16px] left-[10px] lg:left-[16px] flex gap-[5px] z-10">
                             <span v-for="badge in item.badges" :key="badge"
                                 class="px-[7px] py-[5px] rounded-[5px] font-['Instrument_Sans'] font-semibold text-[10px] leading-[140%] uppercase bg-[#D4AF37]">
                                 {{ badge }}
@@ -191,12 +195,13 @@ const topPicks = [
                         </div>
 
                         <div
-                            class="px-[14px] pb-[18px] absolute inset-0 bg-gradient-to-t from-black/90 from-20% to-transparent flex flex-col justify-end">
-                            <h3 class="text-xl font-['Geist'] font-semibold leading-[100%] mb-[10px]">
+                            class="px-[14px] pb-[14px] lg:pb-[18px] absolute inset-0 bg-gradient-to-t from-black/90 from-20% to-transparent flex flex-col justify-end">
+                            <h3
+                                class="text-base lg:text-xl font-['Geist'] font-semibold leading-[100%] mb-[5px] lg:mb-[10px]">
                                 {{ item.title }}
                             </h3>
                             <p
-                                class="font-['Instrument_Sans'] font-normal text-[13px] leading-[140%] line-clamp-2 text-[#B8BDC7]">
+                                class="font-['Instrument_Sans'] font-normal text-xs lg:text-[13px] leading-[140%] line-clamp-2 text-text-secondary">
                                 {{ item.desc }}
                             </p>
                         </div>

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Footer from '~/components/Footer.vue'
-
 const categories = [
     { title: 'Entertainment', image: '/assets/images/categories1.png', desc: 'Discover a world of movies, series, and immersive stories designed to captivate and inspire.' },
     {
@@ -142,7 +140,7 @@ const toggleFaq = (index: number) => {
                         <div
                             class="absolute top-5 left-5 h-[27px] px-[7px] py-[5px] flex items-center justify-center bg-[#D4AF37] rounded-[5px]">
                             <span class="text-xs font-semibold font-['Instrument_Sans'] leading-[140%]">{{ item.tag
-                            }}</span>
+                                }}</span>
                         </div>
                         <img :src="item.image" :alt="item.title"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
@@ -191,7 +189,7 @@ const toggleFaq = (index: number) => {
                         <div
                             class="absolute top-5 left-5 h-[27px] px-[7px] py-[5px] flex items-center justify-center bg-[#D4AF37] rounded-[5px]">
                             <span class="text-xs font-semibold font-['Instrument_Sans'] leading-[140%]">{{ item.tag
-                            }}</span>
+                                }}</span>
                         </div>
                         <img :src="item.image" :alt="item.title"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">

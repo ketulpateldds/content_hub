@@ -27,7 +27,6 @@ const selectCountry = (country: string) => {
     selectedCountry.value = country;
 };
 
-// Watch for modal open/close to control body scroll
 watch(isOpen, (newValue) => {
     if (newValue) {
         document.body.style.overflow = "hidden";
@@ -41,45 +40,40 @@ watch(isOpen, (newValue) => {
     <Teleport to="body">
         <Transition name="language-fade">
             <div v-if="isOpen"
-                class="fixed inset-0 z-50 flex items-center justify-center text-[#FFFFFF] bg-[#0b0d12cc] backdrop-blur-[20px]"
+                class="fixed inset-0 z-50 flex items-center justify-center text-white bg-deep-black/80 backdrop-blur-[20px] p-4 md:p-6"
                 @click.self="closeModal">
                 <div
-                    class="relative w-[870px] max-h-[725px] overflow-y-auto rounded-xl bg-[#12141A] border border-[#1C1F26]">
-                    <!-- Close Button -->
+                    class="relative w-[358px] md:w-[650px] lg:w-[872px] max-h-[694px] md:max-h-[725px] overflow-y-auto rounded-xl bg-soft-black border border-slate-gray">
                     <button @click="closeModal"
-                        class="absolute top-[18px] right-[18px] w-5 h-5 flex items-center justify-center text-white hover:text-[#00A8AB] transition-colors">
+                        class="absolute top-4 md:top-[18px] right-4 md:right-[18px] w-5 h-5 flex items-center justify-center text-white hover:text-accent transition-colors">
                         <i class="ri-close-line text-xl"></i>
                     </button>
 
-                    <!-- Title -->
                     <h2
-                        class="font-['Geist'] font-medium text-2xl leading-[100%] p-[30px] bg-gradient-to-r from-white/90 to-white/60 bg-clip-text text-transparent">
+                        class="font-['Geist'] font-medium text-lg md:text-2xl leading-[110%] md:leading-[100%] p-4 md:p-[30px] bg-gradient-to-r from-white/90 to-white/60 bg-clip-text text-transparent">
                         Select a country or region
                     </h2>
 
-                    <div class="bg-[#1C1F26] h-[1px] w-full"></div>
+                    <div class="bg-slate-gray h-[1px] w-full mb-4 md:mb-[30px]"></div>
 
-                    <!-- Regions -->
                     <div v-for="(region, regionIndex) in regions" :key="regionIndex"
-                        class="mx-[30px] mt-[30px] pb-6 border-b border-[#1C1F26]">
-                        <!-- Region Header -->
+                        class="mx-4 md:mx-[30px] pb-4 md:pb-6 border-b border-slate-gray">
                         <div class="flex items-center justify-between h-[18px] mb-[30px]">
-                            <h3 class="font-['Geist'] font-medium text-lg leading-[100%]">
+                            <h3 class="font-['Geist'] font-medium text-base md:text-lg leading-[100%]">
                                 {{ region.title }}
                             </h3>
                             <button
-                                class="font-['Instrument_Sans'] font-semibold text-xs leading-[18px] text-[#00A8AB] hover:text-[#00989B] transition-colors flex items-center gap-[5px]">
+                                class="font-['Instrument_Sans'] font-semibold text-xs leading-[18px] text-accent hover:text-accent/90 transition-colors flex items-center gap-[5px]">
                                 See All
                                 <i class="ri-arrow-right-s-line text-base"></i>
                             </button>
                         </div>
 
-                        <!-- Countries Grid -->
-                        <div class="grid grid-cols-4 gap-y-[10px] gap-x-6">
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-[10px] gap-x-4 md:gap-x-6">
                             <button v-for="country in region.countries.flat()" :key="country"
                                 @click="selectCountry(country)" :class="selectedCountry === country
-                                    ? 'bg-[#00A8AB]'
-                                    : 'bg-transparent hover:bg-[#1C1F26]'
+                                    ? 'bg-accent'
+                                    : 'bg-transparent hover:bg-slate-gray'
                                     "
                                 class="h-[31px] p-[7px] rounded-[5px] font-['Instrument_Sans'] font-normal text-xs leading-[140%] text-left flex items-center justify-between transition-colors">
                                 {{ country }}
@@ -88,27 +82,24 @@ watch(isOpen, (newValue) => {
                         </div>
                     </div>
 
-                    <!-- Duplicate Region for scrolling demo -->
                     <div v-for="(region, regionIndex) in regions" :key="'dup-' + regionIndex"
-                        class="mx-[30px] mt-6 pb-6 border-b border-[#1C1F26]">
-                        <!-- Region Header -->
+                        class="mx-4 md:mx-[30px] pb-4 md:pb-6 mt-4 md:mt-6 border-b border-slate-gray">
                         <div class="flex items-center justify-between h-[18px] mb-[30px]">
-                            <h3 class="font-['Geist'] font-medium text-lg leading-[100%]">
+                            <h3 class="font-['Geist'] font-medium text-base md:text-lg leading-[100%]">
                                 {{ region.title }}
                             </h3>
                             <button
-                                class="font-['Instrument_Sans'] font-semibold text-xs leading-[18px] text-[#00A8AB] hover:text-[#00989B] transition-colors flex items-center gap-[5px]">
+                                class="font-['Instrument_Sans'] font-semibold text-xs leading-[18px] text-accent hover:text-accent/90 transition-colors flex items-center gap-[5px]">
                                 See All
                                 <i class="ri-arrow-right-s-line text-base"></i>
                             </button>
                         </div>
 
-                        <!-- Countries Grid -->
-                        <div class="grid grid-cols-4 gap-y-[10px] gap-x-6">
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-[10px] gap-x-6">
                             <button v-for="country in region.countries.flat()" :key="country"
                                 @click="selectCountry(country)" :class="selectedCountry === country
-                                    ? 'bg-[#00A8AB]'
-                                    : 'bg-transparent hover:bg-[#1C1F26]'
+                                    ? 'bg-accent'
+                                    : 'bg-transparent hover:bg-slate-gray'
                                     "
                                 class="h-[31px] p-[7px] rounded-[5px] font-['Instrument_Sans'] font-normal text-xs leading-[140%] text-left flex items-center justify-between transition-colors">
                                 {{ country }}

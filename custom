@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+:root {
+  /* ContentHub Theme Colors - Based on Design System */
+  --accent: #00A8AB;
+  --accent-hover: #00989B;
+  --deep-black: #0B0D12;
+  --soft-black: #12141A;
+  --slate-gray: #1C1F26;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B8BDC7;
+  
+  /* Additional Theme Variables */
+  --border-color: rgba(255, 255, 255, 0.1);
+  --background: #0B0D12;
+  --foreground: #FFFFFF;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-instrument: var(--font-instrument-sans);
+
+  /* Custom Container Sizes - Based on Figma Design Specs */
+  
+  /* Desktop: Screen 1512px, Content 1320px */
+  --container-desktop: 82.5rem; /* 1320px */
+  --screen-desktop: 94.5rem; /* 1512px */
+  
+  /* Tablet: Screen 744px, Content 696px */
+  --container-tablet: 43.5rem; /* 696px */
+  --screen-tablet: 46.5rem; /* 744px */
+  
+  /* Mobile: Screen 390px, Content 358px */
+  --container-mobile: 22.375rem; /* 358px */
+  --screen-mobile: 24.375rem; /* 390px */
+
+  /* Popup Animations */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes slide-down {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Animation Utilities */
+  --animate-fade-in: fade-in 0.3s ease-out forwards;
+  --animate-scale-in: scale-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-down: slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-up: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Global Body Styles */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Instrument Sans';
+  margin: 0;
+  padding: 0;
+}
+
+/* Hide scrollbar globally but keep functionality */
+* {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, and Opera */
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Scrollbar hide utility for specific components */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Common Transition Classes */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Modal/Overlay Backdrop */
+.modal-backdrop {
+  background-color: rgba(11, 13, 18, 0.8);
+  backdrop-filter: blur(20px);
+}
+
+/* Common Button Styles */
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Common Card Styles */
+.card {
+  background-color: var(--soft-black);
+  border: 1px solid var(--slate-gray);
+  border-radius: 14px;
+}
+
+/* Text Gradient Utility */
+.text-gradient {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Focus Visible Styles */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Selection Styles */
+::selection {
+  background-color: var(--accent);
+  color: var(--text-primary);
+}
+
+::-moz-selection {
+  background-color: var(--accent);
+  color: var(--text-primary);
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent text selection on buttons and interactive elements */
+button,
+a,
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Image optimization */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Remove default button styles */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+}
+
+/* Link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Input and textarea base styles */
+input,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Remove input number arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
