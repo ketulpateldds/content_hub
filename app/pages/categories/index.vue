@@ -2,6 +2,11 @@
 const filters = ['All Categories', 'A - Z', 'Most Popular', 'Recently Updated']
 const activeFilter = ref('All Categories')
 
+// Helper function to convert title to URL-friendly slug
+const toSlug = (title: string) => {
+    return title.toLowerCase().replace(/\s+&\s+/g, '-').replace(/\s+/g, '-')
+}
+
 const categories = [
     {
         title: 'Entertainment',
@@ -90,7 +95,7 @@ const categories = [
             <div class="grid grid-cols-4 gap-6">
                 <div v-for="cat in categories" :key="cat.title"
                     class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer"
-                    @click="navigateTo('/singlecategories')">
+                    @click="navigateTo(`/categories/${toSlug(cat.title)}`)">
                     <img :src="cat.image" :alt="cat.title"
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
 

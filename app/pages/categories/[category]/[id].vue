@@ -1,15 +1,23 @@
 <script setup lang="ts">
-// Get the content ID from URL query parameter
 const route = useRoute();
-const contentId = computed(() => route.query.id);
+const contentId = computed(() => route.params.id);
+const category = computed(() => route.params.category as string);
 
-// Mock content data - this will be replaced with API call later
-// Structure designed to match future API response
+const toTitle = (slug: string) => {
+    return slug
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+        .replace(/And/g, '&');
+};
+
+const categoryTitle = computed(() => toTitle(category.value));
+
 const contentData = ref({
     id: contentId.value,
     title: "Mindful Meditation Practices",
     subtitle: "Transform your daily routine with powerful meditation techniques.",
-    category: "Health & Wellness",
+    category: categoryTitle.value,
     heroImage: "/assets/images/categories-bg2.png",
     content: {
         paragraphs: [
@@ -46,7 +54,6 @@ const contentData = ref({
     ],
 });
 
-// Top picks - related content recommendations
 const topPicks = [
     {
         id: 1,
@@ -86,7 +93,7 @@ const topPicks = [
             style="
         background-image: url('/assets/images/content-bg.png'); background-size: cover; background-position: top center;">
             <div class="absolute top-[254px] left-[96px] z-10 max-w-[1080px]">
-                <button @click="navigateTo('/singlecategories')"
+                <button @click="navigateTo(`/categories/${category}`)"
                     class="flex items-center gap-[10px] text-[#00A8AB] mb-[25px] hover:text-[#00989B] transition-colors">
                     <i class="ri-arrow-left-line text-2xl"></i>
                     <span
@@ -172,7 +179,7 @@ const topPicks = [
                 <div class="grid grid-cols-4 gap-6">
                     <div v-for="item in topPicks" :key="item.id"
                         class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer"
-                        @click="navigateTo(`/singlecontent?id=${item.id}`)">
+                        @click="navigateTo(`/categories/${category}/${item.id}`)">
                         <img :src="item.image" :alt="item.title"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
 

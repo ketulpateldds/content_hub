@@ -1,4 +1,16 @@
 <script setup lang="ts">
+const route = useRoute();
+const category = computed(() => route.params.category as string);
+// Helper function to convert slug back to title
+const toTitle = (slug: string) => {
+    return slug
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+        .replace(/And/g, '&');
+};
+const categoryTitle = computed(() => toTitle(category.value));
+
 const filters = ["All", "New Releases", "Most Viewed", "Trending"];
 const activeFilter = ref("All");
 
@@ -32,7 +44,6 @@ const featuredContent = [
         badges: [],
     },
 ];
-
 const allContent = [
     {
         id: 5,
@@ -120,7 +131,6 @@ const allContent = [
     },
 ];
 </script>
-
 <template>
     <div class="min-h-screen bg-[#0B0D12] text-[#FFFFFF]">
         <!-- Hero Section -->
@@ -129,7 +139,7 @@ const allContent = [
         background-size: cover;
         background-position: center;
       ">
-            <div class="absolute top-[275px] left-[96px] z-10 max-w-[1018px]">
+            <div class="absolute top-[254px] left-[96px] z-10 max-w-[1018px]">
                 <div @click="navigateTo('/categories')" class="flex items-center gap-[10px] text-[#00A8AB] mb-[9px]">
                     <i class="ri-arrow-left-line text-2xl"></i>
                     <span
@@ -175,7 +185,7 @@ const allContent = [
             <div class="grid grid-cols-4 gap-6">
                 <div v-for="item in featuredContent" :key="item.title"
                     class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer"
-                    @click="navigateTo(`/singlecontent?id=${item.id}`)">
+                    @click="navigateTo(`/categories/${category}/${item.id}`)">
                     <img :src="item.image" :alt="item.title"
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
 
@@ -223,7 +233,7 @@ const allContent = [
             <div class="grid grid-cols-4 gap-6">
                 <div v-for="item in allContent" :key="item.title + Math.random()"
                     class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer"
-                    @click="navigateTo(`/singlecontent?id=${item.id}`)">
+                    @click="navigateTo(`/categories/${category}/${item.id}`)">
                     <img :src="item.image" :alt="item.title"
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
 
