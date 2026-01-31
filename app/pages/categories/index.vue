@@ -2,11 +2,6 @@
 const filters = ['All Categories', 'A - Z', 'Most Popular', 'Recently Updated']
 const activeFilter = ref('All Categories')
 
-// Helper function to convert title to URL-friendly slug
-const toSlug = (title: string) => {
-    return title.toLowerCase().replace(/\s+&\s+/g, '-').replace(/\s+/g, '-')
-}
-
 const categories = [
     {
         title: 'Entertainment',
@@ -60,94 +55,83 @@ const categories = [
 </script>
 
 <template>
-    <div class="min-h-screen bg-[#0B0D12] text-[#FFFFFF]">
-
-        <!-- Hero Section -->
-        <section class="relative h-[632px] w-full flex flex-col"
+    <div class="min-h-screen bg-deep-black text-text-primary">
+        <section class="relative h-[383px] md:h-[400px] lg:h-[632px] w-full flex flex-col"
             style="background-image: url('/assets/images/categories-bg.png'); background-size: cover; background-position: center;">
-            <div class="absolute top-[280px] left-[96px] z-10">
+            <div class="absolute top-[166px] md:top-[180px] lg:top-[280px] left-4 md:left-6 lg:left-[96px] z-10">
                 <p
-                    class="font-['Instrument_Sans'] font-semibold text-sm tracking-[5%] leading-[100%] uppercase text-[#00A8AB] mb-[14px]">
+                    class="font-['Instrument_Sans'] font-semibold text-[10px] md:text-xs lg:text-sm tracking-[0%] md:tracking-[5%] leading-[100%] uppercase text-accent mb-[10px] lg:mb-[14px]">
                     Discover content by topic, interest, and experience</p>
                 <h1
-                    class="font-['Geist'] font-bold text-[76px] leading-[100%] mb-[30px] bg-gradient-to-r from-[#FFFFFFE5] to-[#FFFFFF99] bg-clip-text text-transparent">
+                    class="font-['Geist'] font-bold text-[36px] md:text-[40px] lg:text-[76px] leading-[100%] mb-[10px] lg:mb-[30px] bg-gradient-to-r from-white/90 to-white/60 bg-clip-text text-transparent">
                     Browse Categories</h1>
-                <p class="font-['Instrument_Sans'] font-normal text-lg leading-[100%]">Explore a wide range of curated
-                    categories, each offering
-                    premium content designed to inform, inspire, and entertain.</p>
+                <p
+                    class="font-['Instrument_Sans'] font-normal text-sm md:text-base lg:text-lg leading-[160%] md:leading-[150%] lg:leading-[100%]">
+                    Explore a wide range of curated categories, each offering premium content designed to inform,
+                    inspire, and entertain.</p>
             </div>
         </section>
 
-        <!-- Filters -->
-        <section class="max-w-[1320px] mx-auto pt-[50px] pb-10 flex justify-center">
-            <div class="flex gap-6 h-[50px]">
+        <section
+            class="max-w-mobile md:max-w-tablet lg:max-w-desktop mx-auto pt-[30px] md:pt-[50px] lg:pt-[50px] pb-[30px] lg:pb-10 md:flex md:justify-center overflow-x-auto md:overflow-x-visible scrollbar-hide">
+            <div
+                class="flex flex-nowrap md:flex-wrap gap-[7px] md:gap-[14px] lg:gap-6 h-[36px] md:h-[45px] lg:h-[50px] px-4 md:px-0">
                 <button v-for="filter in filters" :key="filter"
-                    class="rounded-[6px] transition-colors border border-white/10"
-                    :class="activeFilter === filter ? 'bg-[#00A8AB] text-white py-[14px] pl-5 pr-[18px]' : 'bg-[#1C1F26] py-[14px] px-[30px]'">
-                    <span class="font-['Instrument_Sans'] font-semibold text-sm leading-[18px] align-middle">{{ filter
-                    }}</span>
+                    class="rounded-[6px] transition-colors text-center flex items-center justify-center border border-white/10 whitespace-nowrap flex-shrink-0"
+                    :class="activeFilter === filter ? 'bg-accent text-white py-[14px] px-5 md:pl-5 md:pr-[18px]' : 'bg-slate-gray py-[14px] px-5 md:px-[30px]'">
+                    <span
+                        class="font-['Instrument_Sans'] font-semibold text-xs lg:text-sm leading-[18px] align-middle">{{
+                            filter
+                        }}</span>
                 </button>
             </div>
         </section>
 
-        <!-- Category Grid -->
-        <section class="max-w-[1320px] mx-auto mb-[50px]">
-            <div class="grid grid-cols-4 gap-6">
-                <div v-for="cat in categories" :key="cat.title"
-                    class="group relative h-[350px] rounded-[14px] ring-1 ring-[#1C1F26] ring-inset overflow-hidden cursor-pointer"
-                    @click="navigateTo(`/categories/${toSlug(cat.title)}`)">
-                    <img :src="cat.image" :alt="cat.title"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-
-                    <div
-                        class="px-[14px] pb-[18px] absolute inset-0 bg-gradient-to-t from-black/90 from-20% via-black/40 to-transparent flex flex-col justify-end">
-                        <span
-                            class="font-['Instrument_Sans'] font-semibold text-[13px] leading-[140%] tracking-[0%] mb-[5px]">
-                            {{ cat.count }}</span>
-                        <h3 class="text-xl font-['Geist'] font-semibold leading-[100%] tracking-[0%] mb-[10px]">
-                            {{ cat.title }}</h3>
-                        <p
-                            class="font-['Instrument_Sans'] font-normal text-[13px] leading-[140%] tracking-[0%] line-clamp-2 text-[#B8BDC7]">
-                            {{ cat.desc }}</p>
-                    </div>
-                </div>
+        <section class="max-w-mobile md:max-w-tablet lg:max-w-desktop mx-auto mb-10 lg:mb-[50px]">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[14px] lg:gap-6">
+                <CategoryCard v-for="cat in categories" :key="cat.title" :title="cat.title" :count="cat.count"
+                    :desc="cat.desc" :image="cat.image" />
             </div>
 
-            <!-- Pagination -->
-            <div class="flex justify-center items-center gap-10 mt-[50px]">
-                <button class="w-[46px] h-[46px] flex items-center justify-center rounded-[10px] bg-[#1C1F26]">
+            <div class="flex justify-center items-center gap-10 mt-10 lg:mt-[50px]">
+                <button
+                    class="w-10 lg:w-[46px] h-10 lg:h-[46px] flex items-center justify-center rounded-[10px] bg-slate-gray">
                     <i class="ri-arrow-left-line text-xl"></i>
                 </button>
                 <div class="flex items-center gap-[5px]">
-                    <button class="w-[46px] h-[46px] flex items-center justify-center rounded-[6px] bg-[#00A8AB]">
+                    <button
+                        class="w-10 lg:w-[46px] h-10 lg:h-[46px] flex items-center justify-center rounded-[6px] bg-accent">
                         <span
                             class="font-['Instrument_Sans'] font-semibold text-[18px] leading-[145%] align-center">1</span>
                     </button>
-                    <button class="w-[46px] h-[46px] flex items-center justify-center rounded-[6px]">
+                    <button class="w-10 lg:w-[46px] h-10 lg:h-[46px] flex items-center justify-center rounded-[6px]">
                         <span
                             class="font-['Instrument_Sans'] font-semibold text-[18px] leading-[145%] align-center">2</span>
                     </button>
-                    <button class="w-[46px] h-[46px] flex items-center justify-center rounded-[6px]">
+                    <button class="w-10 lg:w-[46px] h-10 lg:h-[46px] flex items-center justify-center rounded-[6px]">
                         <span
                             class="font-['Instrument_Sans'] font-semibold text-[18px] leading-[145%] align-center">3</span>
                     </button>
                 </div>
-                <button class="w-[46px] h-[46px] flex items-center justify-center rounded-[10px] bg-[#1C1F26]">
+                <button
+                    class="w-10 lg:w-[46px] h-10 lg:h-[46px] flex items-center justify-center rounded-[10px] bg-slate-gray">
                     <i class="ri-arrow-right-line text-xl"></i>
                 </button>
             </div>
         </section>
 
-        <div class="max-w-[1320px] h-[1px] bg-[#1C1F26] mx-auto mb-[50px]"></div>
+        <div class="max-w-mobile md:max-w-tablet lg:max-w-desktop h-[1px] bg-slate-gray mx-auto mb-[50px]"></div>
 
-        <!-- Promo Banner -->
-        <section class="max-w-[1320px] mx-auto mb-20">
-            <div class="relative rounded-[20px] overflow-hidden h-[401px] flex items-center"
+        <section class="max-w-mobile md:max-w-tablet lg:max-w-desktop mx-auto">
+            <div class="relative rounded-[20px] overflow-hidden h-[500px] md:h-[308px] lg:h-[401px] flex items-end md:items-center justify-center md:justify-start"
                 style="background-image: url('/assets/images/promo-banner2.png'); background-size: cover; background-position: center;">
-                <div class="pl-[60px] py-[100px] flex flex-col justify-center relative z-10 max-w-[738px]">
-                    <h2 class="font-['Geist'] text-[40px] font-semibold leading-[130%] mb-[10px]">Discover Content <br>
-                        Across Every Category</h2>
-                    <p class="text-[#B8BDC7] font-['Instrument_Sans'] text-lg font-normal leading-[160%] tracking-[0%]">
+                <div
+                    class="pl-[14px] pr-[14px] md:pr-0 md:pl-[30px] lg:pl-[60px] py-10 md:py-[30px] lg:py-[100px] flex flex-col justify-center relative z-10 max-w-[480px] lg:max-w-[738px]">
+                    <h2
+                        class="font-['Geist'] text-[26px] md:text-[30px] lg:text-[40px] text-center md:text-left font-semibold leading-[130%] mb-[10px]">
+                        Discover Content <br> Across Every Category</h2>
+                    <p
+                        class="text-text-secondary font-['Instrument_Sans'] text-center md:text-left text-xs lg:text-lg font-normal leading-[170%] lg:leading-[160%] tracking-[0%]">
                         Our categories are thoughtfully organized to help you quickly find content that matches your
                         interests. From entertainment and education to technology and wellness, each category offers a
                         curated collection of high-quality experiences.
